@@ -1,0 +1,35 @@
+@import "variables.scss";
+@import "default.scss";
+@import "fonts.scss";
+@import "reset.scss";
+
+//components
+@import "components/main.scss";
+
+.app {
+  &__body {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+  }
+}
+
+.header-component {
+  margin-bottom: 32px;
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+}
+
+.flex {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+
+  &__right {
+    flex: 1 1 auto;
+  }
+}

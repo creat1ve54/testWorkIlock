@@ -28,7 +28,7 @@ interface ITodos {
 interface ITodosInitial {
   todos: ITodos[];
   isLoading: boolean;
-  error: string;
+  error: string | undefined;
 }
 
 const initialState: ITodosInitial = {
@@ -47,7 +47,7 @@ export const todosSlice = createSlice({
     });
     builder.addCase(todosThunk.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = "Ошибка";
+      state.error = action.error.message;
     });
     builder.addCase(todosThunk.fulfilled, (state, action) => {
       state.isLoading = false;

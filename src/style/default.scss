@@ -1,0 +1,73 @@
+:root {
+  --bg-color: #{$WBg};
+  --text-color: #{$BBlack};
+  --fill: #{$BBlack};
+  --stroke: #{$BBlack};
+}
+
+// Класс или атрибут для темной темы
+[data-theme="dark"] {
+  --bg-color: #{$BBlack};
+  --text-color: #{$WWhite};
+  --fill: #{$WWhite};
+  --stroke: #{$WWhite};
+}
+
+* {
+  font-family: $fontFamily;
+  font-size: 16px;
+  line-height: 100%;
+  color: var(--text-color);
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+h1 {
+  font-family: $fontFamilyProstoOne;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 100%;
+  color: $BSubT;
+}
+
+.h1 {
+  font-family: $fontFamilyProstoOne;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 100%;
+  color: $BSubT;
+}
+
+.h2 {
+  font-family: $fontFamilyProstoOne;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  color: $BSubT;
+}
+
+h2 {
+  font-family: $fontFamilyProstoOne;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  color: $BSubT;
+}
+
+.title {
+  margin-bottom: 24px;
+}
+
+.description {
+  color: $BSupport;
+  line-height: 110%;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1150px;
+  padding: 0px 20px;
+  height: 100%;
+}
