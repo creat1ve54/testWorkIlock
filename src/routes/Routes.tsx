@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route } from "react-router-dom";
 import Main from "../app/pages/Main";
 import DetailTodo from "../app/pages/DetailTodo";
 

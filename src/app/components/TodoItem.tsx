@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { ITodo } from "../../type";
 import Svg from "../../assets/svg/Svg";
 import { deleteTodoThunk, putTodoThunk } from "../../redux/todo/todoSlice";
