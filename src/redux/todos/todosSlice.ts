@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
-import { todosAPI } from "../../api/axios";
+import { todoAPI, todosAPI } from "../../api/axios";
+import { ITodo } from "../../type";
 
 //THUNK
 export const todosThunk = createAsyncThunk("post/getTodosThunk", async () => {
@@ -7,26 +8,17 @@ export const todosThunk = createAsyncThunk("post/getTodosThunk", async () => {
   return todosData;
 });
 
-export const todoThunk = createAsyncThunk(
-  "todos/getTodoThunk",
-  async (id: number) => {
-    const todoData = (await todosAPI.getTodo(id)).data;
+export const postTodoThunk = createAsyncThunk(
+  "todos/postTodoThunk",
+  async (todo: Partial<ITodo>) => {
+    const todoData = (await todoAPI.postTodo(todo)).data;
     return todoData;
   },
 );
 
-//TS
-interface ITodos {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-  name?: string;
-  photoSrc?: string;
-}
 
 interface ITodosInitial {
-  todos: ITodos[];
+  todos: ITodo[];
   isLoading: boolean;
   error: string | undefined;
 }
@@ -38,7 +30,7 @@ const initialState: ITodosInitial = {
 };
 
 export const todosSlice = createSlice({
-  name: "posts",
+  name: "todos",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -53,6 +45,19 @@ export const todosSlice = createSlice({
       state.isLoading = false;
       state.error = "";
       state.todos = action.payload;
+    });
+
+    builder.addCase(postTodoThunk.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(postTodoThunk.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(postTodoThunk.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.error = "";
+      state.todos.push(action.payload);
     });
   },
 });

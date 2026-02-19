@@ -1,20 +1,27 @@
 import axios from "axios";
+import { ITodo } from "../type";
 
 export const instance = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
+  baseURL: "http://localhost:3004/",
 });
 
 export const todosAPI = {
   getTodos() {
     return instance.get("/todos");
   },
-  getTodo(id: number) {
+}
+
+export const todoAPI = {
+  getTodo(id: string) {
     return instance.get(`/todos/${id}`);
   },
-//   putSportsmans(sportsmansAndTeam) {
-//     return instance.put("/sportsmans", { sportsmansAndTeam });
-//   },
-//   deleteSportsman(id) {
-//     return instance.delete(`/sportsmans/${id}`, { id });
-//   },
+  postTodo(todo: Partial<ITodo>) {
+    return instance.post(`/todos`, todo);
+  },
+  putTodo(id: string, updateTodo: Partial<ITodo>) {
+    return instance.put(`/todos/${id}`, updateTodo);
+  },
+  delteTodo(id: string) {
+    return instance.delete(`/todos/${id}`);
+  },
 };

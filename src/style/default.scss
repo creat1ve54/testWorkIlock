@@ -71,3 +71,31 @@ h2 {
   padding: 0px 20px;
   height: 100%;
 }
+
+.custom-switch {
+  display: inline-flex;
+  border-radius: 4px;
+  border: 1px solid $BReserve;
+
+  &__item {
+    span {
+      display: block;
+      padding: 4px 6px;
+    }
+
+    input {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  input {
+    &:checked {
+      & ~ span {
+        background-color: $Accent60;
+        color: $WWhite;
+      }
+    }
+  }
+}

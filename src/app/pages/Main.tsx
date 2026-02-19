@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { todosThunk } from "../../redux/todos/todosSlice";
 import Header from "../components/Header";
+import { Link } from "react-router";
 
 const Main = () => {
   const dispatch = useAppDispatch();
   const { todos, isLoading, error } = useAppSelector(
-    (state) => state.postsSlice,
+    (state) => state.todosSlice,
   );
 
   useEffect(() => {
@@ -26,11 +27,11 @@ const Main = () => {
             <div>{error}</div>
           ) : (
             todos.map((todo) => (
-              <div key={todo.id}>
-                <h3>{todo.name ? todo.name : "Нет названия"}</h3>
-                <p>{todo.title}</p>
-                <div>Статус: {todo.completed.toString()}</div>
-              </div>
+              <Link to={`/todo/${todo.id}`} key={todo.id}>
+                <h3>{todo.title}</h3>
+                <p>{todo.description ? todo.description : "Нет описания"}</p>
+                <div>Статус: {todo.status}</div>
+              </Link>
             ))
           )}
         </div>

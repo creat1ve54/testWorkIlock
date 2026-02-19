@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Svg from "../../assets/svg/Svg";
+import { useModal } from "../../hooks/useModal";
+import Modal from "./Modal";
+import TodoForm from "./TodoForm";
 
 const Header = () => {
+  const { isOpen, open, close } = useModal();
   const [themeLigth, setThemeLigth] = useState(true);
 
   useEffect(() => {
-    // Проверка сохраненной темы в localStorage
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       setThemeLigth(savedTheme === "light");
@@ -18,7 +21,7 @@ const Header = () => {
     localStorage.setItem("theme", theme);
   }, [themeLigth]);
 
-  const toggleTheme = () => setThemeLigth((prev) => !prev);
+  const onAddTodo = () => {};
 
   const onChangeTheme = () => {
     setThemeLigth((prev) => !prev);
@@ -47,6 +50,12 @@ const Header = () => {
               )}
             </label>
           </div>
+
+          <button onClick={open}>Добавить задачу</button>
+
+          <Modal isOpen={isOpen} onClose={close} title="Создание задачи">
+            <TodoForm onClose={close}/>
+          </Modal>
         </div>
       </div>
     </div>
