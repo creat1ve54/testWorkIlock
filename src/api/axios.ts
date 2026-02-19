@@ -2,7 +2,8 @@ import axios from "axios";
 import { ITodo } from "../type";
 
 export const instance = axios.create({
-  baseURL: "http://localhost:3004/",
+  baseURL: "https://json-server-1-osfy.onrender.com",
+  // baseURL: "http://localhost:3004/",
 });
 
 export const todosAPI = {
