@@ -26,6 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "server": "json-server db.json --port 3004",
+    "serverRender": "json-server db.json --host 0.0.0.0 --port $PORT",
     "dev": "concurrently \"npm run server\" \"npm run start\"",
     "build": "react-scripts build",
     "buildServer": "concurrently \"npm run build\" \"npm run server\"",
