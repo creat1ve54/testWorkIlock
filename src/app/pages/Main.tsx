@@ -12,7 +12,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(todosThunk());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="main">

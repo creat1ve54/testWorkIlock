@@ -4,14 +4,12 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   deleteTodoThunk,
   getTodoThunk,
-  putTodoThunk,
 } from "../../redux/todo/todoSlice";
 import Modal from "../components/Modal";
 import TodoForm from "../components/TodoForm";
 import { useModal } from "../../hooks/useModal";
 import Header from "../components/Header";
 import Svg from "../../assets/svg/Svg";
-import { ITodo } from "../../type";
 
 const DetailTodo = () => {
   const { isOpen, open, close } = useModal();
@@ -33,7 +31,7 @@ const DetailTodo = () => {
     if (params.id) {
       dispatch(getTodoThunk(params.id));
     }
-  }, []);
+  }, [dispatch, params.id]);
 
   return (
     <div className="todo-detail">

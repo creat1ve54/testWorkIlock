@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { ITodo } from "../../type";
 import { useAppDispatch } from "../../redux/hooks";
 import { postTodoThunk } from "../../redux/todos/todosSlice";
@@ -21,15 +20,14 @@ const TodoForm = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const [title, setTitle] = useState(todo?.title || "");
-  const [status, setStatus] = useState(todo?.status || "В работе");
-  const [description, setDescription] = useState(todo?.description || "");
-  const [createdAt, setCreatedAt] = useState("");
+  // const [title, setTitle] = useState(todo?.title || "");
+  // const [status, setStatus] = useState(todo?.status || "В работе");
+  // const [description, setDescription] = useState(todo?.description || "");
+  // const [createdAt, setCreatedAt] = useState("");
 
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<TodoFormInputs>({
     defaultValues: {
@@ -54,16 +52,15 @@ const TodoForm = ({
     onClose();
   };
 
-  useEffect(() => {
-    if (todo && isEdit) {
-      setTitle(todo.title);
-      setStatus(todo.status);
-      setDescription(todo.description || "");
-    }
-  }, [todo, isEdit]);
+  // useEffect(() => {
+  //   if (todo && isEdit) {
+  //     setTitle(todo.title);
+  //     setStatus(todo.status);
+  //     setDescription(todo.description || "");
+  //   }
+  // }, [todo, isEdit]);
 
   return (
-    // <form onSubmit={(e) => onSubmit(e)} className="todo-form">
     <form onSubmit={handleSubmit(onSubmit)} className="todo-form">
       <div>
         <label className={`field ${errors.title && 'field--error'}`} >
@@ -86,7 +83,7 @@ const TodoForm = ({
                 type="radio"
                 {...register("status", { required: "Обязательное поле" })}
                 value="В работе"
-                checked={status === "В работе"}
+                checked={todo?.status === "В работе"}
               />
               <span>В работe</span>
             </label>
@@ -95,7 +92,7 @@ const TodoForm = ({
                 type="radio"
                 {...register("status", { required: "Обязательное поле" })}
                 value="Выполнено"
-                checked={status === "Выполнено"}
+                checked={todo?.status === "Выполнено"}
               />
               <span>Выполнено</span>
             </label>
