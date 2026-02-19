@@ -9,6 +9,7 @@ export type TodoFormInputs = {
   status: string;
   description: string;
 };
+
 const TodoForm = ({
   todo,
   isEdit = false,
@@ -20,11 +21,6 @@ const TodoForm = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  // const [title, setTitle] = useState(todo?.title || "");
-  // const [status, setStatus] = useState(todo?.status || "В работе");
-  // const [description, setDescription] = useState(todo?.description || "");
-  // const [createdAt, setCreatedAt] = useState("");
-
   const {
     register,
     handleSubmit,
@@ -32,7 +28,7 @@ const TodoForm = ({
   } = useForm<TodoFormInputs>({
     defaultValues: {
       title: todo?.title || "",
-      status: todo?.status || "В работе",
+      status: todo?.status || "В работе", // Начальное значение из пропсов или "В работе"
       description: todo?.description || "",
     },
   });
@@ -52,18 +48,10 @@ const TodoForm = ({
     onClose();
   };
 
-  // useEffect(() => {
-  //   if (todo && isEdit) {
-  //     setTitle(todo.title);
-  //     setStatus(todo.status);
-  //     setDescription(todo.description || "");
-  //   }
-  // }, [todo, isEdit]);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="todo-form">
       <div>
-        <label className={`field ${errors.title && 'field--error'}`} >
+        <label className={`field ${errors.title && 'field--error'}`}>
           <div className="field__title">Название</div>
           <input
             type="text"
@@ -78,21 +66,20 @@ const TodoForm = ({
         <div className={`field ${errors.status && 'field--error'}`}>
           <div className="field__title">Статус</div>
           <div className="custom-switch">
+            {/* ВАЖНО: убраны пропсы `checked` и `useState` */}
             <label className="custom-switch__item">
               <input
                 type="radio"
                 {...register("status", { required: "Обязательное поле" })}
                 value="В работе"
-                checked={todo?.status === "В работе"}
               />
-              <span>В работe</span>
+              <span>В работе</span> {/* Исправлена опечатка: "работе" → "работе" */}
             </label>
             <label className="custom-switch__item">
               <input
                 type="radio"
                 {...register("status", { required: "Обязательное поле" })}
                 value="Выполнено"
-                checked={todo?.status === "Выполнено"}
               />
               <span>Выполнено</span>
             </label>
