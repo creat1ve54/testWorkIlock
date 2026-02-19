@@ -79,10 +79,10 @@
     &--delete {
       svg {
         fill: var(--fill);
-        transition: fill 0.3s ease-in-out;
+        transition: fill 0.3s ease-in-out, color 0.3s ease-in-out;
 
         use {
-          transition: fill 0.3s ease-in-out;
+          transition: fill 0.3s ease-in-out, color 0.3s ease-in-out;
         }
       }
 
