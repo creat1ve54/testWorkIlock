@@ -1,46 +1,43 @@
-# Getting Started with Create React App
+# Начало работы с Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Доступные скрипты
 
-## Available Scripts
-
-In the project directory, you can run:
+В каталоге проекта вы можете запустить:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Приложение запускается в режиме разработки.\
+Откройте [http://localhost:3000](http://localhost:3000), чтобы просмотреть его в браузере.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Страница перезагрузится, если вы внесете изменения.\
+Вы также увидите все ошибки lint в консоли.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Создает приложение для рабочей среды в папке "build".\
+Это корректно связывает React в рабочем режиме и оптимизирует сборку для достижения наилучшей производительности.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Сборка сокращена, а имена файлов содержат хэши.\
+Ваше приложение готово к развертыванию!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Дополнительную информацию смотрите в разделе о [развертывании](https://facebook.github.io/create-react-app/docs/deployment).
 
-### `npm run eject`
+## Структура проекта
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Проект состоит из 2 страниц.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Первая страница. Это главная где расположился список задач, так же есть поиск по данным спискам задач, поиск сортирует элементы по загаловку или по описанию, или по статусу. Так же есть шапка сайта, где есть слева: логотип, справа: переключение темы, добавление новых задач, список пользователей.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Вторая страница. Это детальная карточка задачи. В ней можно изменить данные задачи или вовсе удалить задачу.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Так же есть модальные окна с измененеием задач и добавления новых задач. Используется валидация для того, чтобы задачи не были без заголовка и описания.
 
-## Learn More
+## Доработки
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Основной доработкой будет добавление пагинации, чтобы на странице было не много задач, не грузились все на страницу. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Так же еще одна доработка, это страница с выполненными задачами. Считаю это было бы удобно, но сейчас есть поиск по статусам, и немного это помогает потзоваться, но лучше было бы сделать страницу, чтобы было понятно пользователю.
+
+Третья доработка. Это доработка пользователей, чтобы их можно было добавлять, удалять, изменять. Так же можно было бы добавить, это задачи от пользователей, а потом показывать детальную страницу пользователя и его задачи.
+
+Добавление фото. Чтобы добавить фото, нужно хранить картинки на сервере, с бесплатными сервисами было сложно это сдлеать, можно было бы свой сервер открыть и туда залить, но потратил бы много времени, считаю это тоже доработкой.
