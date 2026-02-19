@@ -1,0 +1,97 @@
+.header {
+  padding-block: 8px;
+  background-color: var(--bg-color-header);
+
+  &__container {
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__switch {
+    cursor: pointer;
+    display: flex;
+    input {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+    }
+  }
+
+  &__right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+
+    span {
+      line-height: 140%;
+    }
+    svg {
+      flex: 0 0 auto;
+      stroke: var(--stroke);
+    }
+  }
+
+  &__add {
+    background: none;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    line-height: 120%;
+    padding: 4px 2px;
+
+    svg {
+      flex: 0 0 auto;
+      stroke: var(--stroke);
+    }
+  }
+
+  &__user {
+    background: none;
+    svg {
+      flex: 0 0 auto;
+      stroke: var(--stroke);
+    }
+  }
+
+  @include mobile {
+    &__add {
+      span {
+        display: none;
+      }
+    }
+
+    &__logo {
+      font-size: 14px;
+
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}

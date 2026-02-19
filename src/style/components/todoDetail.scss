@@ -1,0 +1,61 @@
+.todo-detail {
+  &__container {
+    padding-block: 20px;
+  }
+
+  &__id {
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    margin-bottom: 12px;
+    color: var(--text-color);
+  }
+
+  &__description {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  &__status {
+    &--complited {
+      span {
+        color: $HelpingGreen100;
+      }
+    }
+
+    &--pending {
+      span {
+        color: $HelpingYellow100;
+      }
+    }
+  }
+
+  &__btns {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  &__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+    background: none;
+    &--delete {
+      svg {
+        fill: var(--fill);
+      }
+    }
+
+    &--edit {
+      svg {
+        fill: var(--fill);
+      }
+    }
+  }
+}

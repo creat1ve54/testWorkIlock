@@ -9,7 +9,7 @@ const Modal = ({ isOpen, onClose, title, children }: ITodoModal) => {
     };
     if (isOpen) {
       document.addEventListener("keydown", handleEsc);
-      document.body.style.overflow = "hidden"; // Блокировка прокрутки фона
+      document.body.style.overflow = "hidden";
     }
     return () => {
       document.removeEventListener("keydown", handleEsc);
@@ -33,7 +33,7 @@ const Modal = ({ isOpen, onClose, title, children }: ITodoModal) => {
             &times;
           </button>
         </div>
-        <div className="modal___body">{children}</div>
+        <div className="modal__body">{children}</div>
       </div>
     </div>,
     document.getElementById("modal-root") || document.body,

@@ -8,13 +8,6 @@
       "createdAt": "2023-10-25T10:00:00Z"
     },
     {
-      "id": "2",
-      "title": "Настроить адаптивную верстку",
-      "description": "Убедиться, что карточки задач корректно отображаются на мобильных устройствах (Grid/Flexbox).",
-      "status": "В работе",
-      "createdAt": "2023-10-26T14:30:00Z"
-    },
-    {
       "id": "3",
       "title": "Интеграция с REST API",
       "description": "Реализовать методы GET, POST, PUT для взаимодействия с сервером.",
@@ -36,10 +29,40 @@
       "createdAt": "2023-10-29T11:20:00Z"
     },
     {
-      "id": "790b",
-      "title": "dasdadasdad",
+      "title": "Топ задача",
+      "status": "Выполнено",
+      "description": "Супер ская",
+      "id": "6331"
+    },
+    {
+      "id": "02cd",
+      "title": "321312",
       "status": "В работе",
-      "description": "очень увлекательная история"
+      "description": "dsadadsadasda"
+    },
+    {
+      "id": "6cf6",
+      "title": "dsa",
+      "status": "В работе",
+      "description": "sadasdsadas"
+    },
+    {
+      "id": "26f5",
+      "title": "dsadsa",
+      "status": "В работе",
+      "description": "dsada"
+    },
+    {
+      "id": "5019",
+      "title": "dasdsad",
+      "status": "Выполнено",
+      "description": "sadsada"
+    },
+    {
+      "id": "90fc",
+      "title": "Круто",
+      "status": "В работе",
+      "description": "выфвфывф"
     }
   ],
   "users": [

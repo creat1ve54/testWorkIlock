@@ -4,8 +4,12 @@
 @import "reset.scss";
 
 //components
+@import "components/header.scss";
 @import "components/main.scss";
 @import "components/modal.scss";
+@import "components/todo.scss";
+@import "components/todoForm.scss";
+@import "components/todoDetail.scss";
 
 .app {
   &__body {

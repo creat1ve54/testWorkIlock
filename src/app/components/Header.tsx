@@ -3,10 +3,12 @@ import Svg from "../../assets/svg/Svg";
 import { useModal } from "../../hooks/useModal";
 import Modal from "./Modal";
 import TodoForm from "./TodoForm";
+import { useNavigate } from "react-router";
 
-const Header = () => {
+const Header = ({ isBack = false }: { isBack?: boolean }) => {
   const { isOpen, open, close } = useModal();
   const [themeLigth, setThemeLigth] = useState(true);
+  const navigation = useNavigate();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -21,44 +23,61 @@ const Header = () => {
     localStorage.setItem("theme", theme);
   }, [themeLigth]);
 
-  const onAddTodo = () => {};
+  const onBack = () => {
+    navigation(-1);
+  };
 
   const onChangeTheme = () => {
     setThemeLigth((prev) => !prev);
   };
 
   return (
-    <div className="header">
+    <header className="header">
       <div className="container">
         <div className="header__container">
-          <div>
-            <Svg name="task" width={40} height={40} />
-            Менеджер задач
+          <div className="header__left">
+            {isBack ? (
+              <button className="header__back" onClick={onBack}>
+                <Svg name="arrow-left" width={20} height={20} />
+                <span>Назад</span>
+              </button>
+            ) : (
+              <div className="header__logo">
+                <Svg name="task" width={40} height={40} />
+                Менеджер задач
+              </div>
+            )}
           </div>
 
-          <div>
-            <label>
+          <div className="header__right">
+            <label className="header__switch">
               <input
                 type="checkbox"
                 checked={themeLigth}
                 onChange={onChangeTheme}
               />
               {themeLigth ? (
-                <Svg name="moon" width={40} height={40} />
+                <Svg name="moon" width={20} height={20} />
               ) : (
-                <Svg name="sun" width={40} height={40} />
+                <Svg name="sun" width={20} height={20} />
               )}
             </label>
+            <button onClick={open} className="header__add">
+              <Svg name="task-add" width={20} height={20} />
+              <span>Добавить задачу</span>
+            </button>
+
+            <button onClick={open} className="header__user">
+              <Svg name="user" width={20} height={20} />
+            </button>
+
+            <Modal isOpen={isOpen} onClose={close} title="Добавить задачу">
+              <TodoForm onClose={close} />
+            </Modal>
           </div>
-
-          <button onClick={open}>Добавить задачу</button>
-
-          <Modal isOpen={isOpen} onClose={close} title="Создание задачи">
-            <TodoForm onClose={close}/>
-          </Modal>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

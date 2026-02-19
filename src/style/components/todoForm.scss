@@ -1,0 +1,27 @@
+.todo-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    height: 100%;
+    padding: 16px 20px;
+
+    &__btns {
+        display: flex;
+        gap: 20px;
+    }
+
+    &__btn {
+        color: $WWhite;
+        width: 100%;
+        padding: 6px 8px;
+        border-radius: 6px;
+        &--submit {
+            background-color: $HelpingGreen100;
+        }
+        
+        &--cancel {
+            background-color: $HelpingRed100;
+        }
+    }
+}

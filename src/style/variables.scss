@@ -1,31 +1,67 @@
 $WWhite: #ffffff;
 $WBg: #f2f2f2;
-$WReserve: #E6E6E6;
-$WDisable: #CCCCCC;
+$WReserve: #e6e6e6;
+$WDisable: #cccccc;
 $WTranspW10: rgba(#ffffff, 0.1);
 
-$BBlack: #1A1A1A;
+$BBlack: #1a1a1a;
 $BSubT: #333333;
-$BReserve: #4D4D4D;
+$BReserve: #4d4d4d;
 $BSupport: #999999;
 
-$AccentPrimary: #3361B8;
-$Accent80: #4C74C1;
-$Accent60: #7F9CD2;
-$Accent40: #A6BAE0;
-$Accent20: #CCD7ED;
-$Accent10: #E5EBF6;
+$AccentPrimary: #3361b8;
+$Accent80: #4c74c1;
+$Accent60: #7f9cd2;
+$Accent40: #a6bae0;
+$Accent20: #ccd7ed;
+$Accent10: #e5ebf6;
 
-$HelpingGreen100: #57AA49;
-$HelpingGreen80: #80C575;
+$HelpingGreen100: #57aa49;
+$HelpingGreen80: #80c575;
 
-$HelpingYellow100: #CCA131;
-$HelpingYellow80: #DCB961;
+$HelpingYellow100: #cca131;
+$HelpingYellow80: #dcb961;
 
-$HelpingRed100: #DD554B;
-$HelpingRed80: #EA958E;
-$HelpingRed10: #F9EEED;
-
+$HelpingRed100: #dd554b;
+$HelpingRed80: #ea958e;
+$HelpingRed10: #f9eeed;
 
 $fontFamily: "Actay", "Arial";
 $fontFamilyProstoOne: "Prosto One", "Arial";
+
+//breakpoints
+$laptop: 1439px;
+$table: 1023px;
+$mobile: 767px;
+$mediumMobile: 576px;
+$smallMobile: 374px;
+
+@mixin laptop {
+  @media screen and (max-width: $laptop) {
+    @content;
+  }
+}
+
+@mixin table {
+  @media screen and (max-width: $table) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: $mobile) {
+    @content;
+  }
+}
+
+@mixin mediumMobile {
+  @media screen and (max-width: $mediumMobile) {
+    @content;
+  }
+}
+
+@mixin smallMobile {
+  @media screen and (max-width: $smallMobile) {
+    @content;
+  }
+}

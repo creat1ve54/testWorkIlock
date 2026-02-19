@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { todosThunk } from "../../redux/todos/todosSlice";
 import Header from "../components/Header";
-import { Link } from "react-router";
+import TodoItem from "../components/TodoItem";
 
 const Main = () => {
   const dispatch = useAppDispatch();
@@ -14,8 +14,6 @@ const Main = () => {
     dispatch(todosThunk());
   }, []);
 
-  console.log(todos);
-
   return (
     <div className="main">
       <Header />
@@ -26,13 +24,13 @@ const Main = () => {
           ) : error ? (
             <div>{error}</div>
           ) : (
-            todos.map((todo) => (
-              <Link to={`/todo/${todo.id}`} key={todo.id}>
-                <h3>{todo.title}</h3>
-                <p>{todo.description ? todo.description : "Нет описания"}</p>
-                <div>Статус: {todo.status}</div>
-              </Link>
-            ))
+            <ul className="main__list">
+              {todos.map((todo) => (
+                <li key={todo.id} className="main__item">
+                  <TodoItem todo={todo} />
+                </li>
+              ))}
+            </ul>
           )}
         </div>
       </div>

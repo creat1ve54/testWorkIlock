@@ -1,5 +1,22 @@
 .main {
-    .icon-task {
-        stroke: var(--stroke);
-    }
+  .icon-task {
+    stroke: var(--stroke);
+  }
+
+  &__container {
+    padding-block: 20px;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    display: flex;
+  }
 }

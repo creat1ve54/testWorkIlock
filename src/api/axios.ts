@@ -7,6 +7,7 @@ export const instance = axios.create({
 
 export const todosAPI = {
   getTodos() {
+    // return instance.get("/todos?_page=1&_per_page=5");
     return instance.get("/todos");
   },
 }

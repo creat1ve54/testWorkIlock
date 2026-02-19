@@ -1,16 +1,24 @@
 :root {
+  --shadow-item: #{2px 2px 4px 2px rgba($BBlack, 0.2)};
+  --bg-color-header: #{$Accent20};
   --bg-color: #{$WBg};
   --text-color: #{$BBlack};
   --fill: #{$BBlack};
   --stroke: #{$BBlack};
+  --bg-modal: #{$WWhite};
+  --border: #{$BReserve};
 }
 
 // Класс или атрибут для темной темы
 [data-theme="dark"] {
+  --border: #{$WWhite};
+  --shadow-item: #{2px 2px 4px 2px rgba($BReserve, 0.2)};
+  --bg-color-header: #{$BReserve};
   --bg-color: #{$BBlack};
   --text-color: #{$WWhite};
   --fill: #{$WWhite};
   --stroke: #{$WWhite};
+  --bg-modal: #{$BReserve};
 }
 
 * {
@@ -75,18 +83,22 @@ h2 {
 .custom-switch {
   display: inline-flex;
   border-radius: 4px;
-  border: 1px solid $BReserve;
+  border: 1px solid var(--border);
+  overflow: hidden;
 
   &__item {
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
     span {
       display: block;
-      padding: 4px 6px;
+      padding: 8px 6px;
     }
 
     input {
       position: absolute;
       opacity: 0;
-      visibility: hidden;
+      // visibility: hidden;
     }
   }
 
@@ -97,5 +109,53 @@ h2 {
         color: $WWhite;
       }
     }
+
+    &:focus-visible {
+      & ~ span {
+        outline: auto;
+        outline-color: $BBlack;
+      }
+    }
+  }
+  
+}
+
+
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 20px;
+
+  &--error {
+    input[type='text'], textarea {
+      border-color: $HelpingRed100;
+
+      &::placeholder {
+        color: $HelpingRed100;
+      }
+    }
+  }
+
+
+  &__error {
+    position: absolute;
+    bottom: 4px;
+    font-size: 12px;
+    color: $HelpingRed100;
+  }
+
+  input[type='text'] {
+    padding: 4px 8px;
+    color: $BBlack;
+    border-radius: 4px;
+  }
+
+  textarea {
+    padding: 4px 8px;
+    border-radius: 4px;
+    resize: none;
+    color: $BBlack;
   }
 }

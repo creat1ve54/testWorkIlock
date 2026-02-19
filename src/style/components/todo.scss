@@ -1,0 +1,71 @@
+.todo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 1 1 auto;
+  padding: 6px;
+  box-shadow: var(--shadow-item);
+  border-radius: 10px;
+
+  &__btns {
+    display: flex;
+  }
+
+  &__title {
+    margin-bottom: 12px;
+  }
+
+  &__description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+  }
+
+  &__status {
+    &--complited {
+      span {
+        color: $HelpingGreen100;
+      }
+    }
+
+    &--pending {
+      span {
+        color: $HelpingYellow100;
+      }
+    }
+  }
+
+  &__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    width: 30px;
+    height: 30px;
+
+    svg {
+        flex: 0 0 auto;
+    }
+
+    &--complited {
+      svg {
+        stroke: var(--stroke);
+      }
+    }
+
+    &--delete {
+      svg {
+        fill: var(--fill);
+      }
+    }
+
+    &--edit {
+      svg {
+        fill: var(--fill);
+      }
+    }
+  }
+}
