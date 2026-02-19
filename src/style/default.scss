@@ -7,6 +7,8 @@
   --stroke: #{$BBlack};
   --bg-modal: #{$WWhite};
   --border: #{$BReserve};
+  --fill-hover: #{$Accent40};
+  --stroke-hover: #{$Accent40};
 }
 
 // Класс или атрибут для темной темы
@@ -126,17 +128,6 @@ h2 {
   gap: 8px;
   padding-bottom: 20px;
 
-  &--error {
-    input[type="text"],
-    textarea {
-      border-color: $HelpingRed100;
-
-      &::placeholder {
-        color: $HelpingRed100;
-      }
-    }
-  }
-
   &__error {
     position: absolute;
     bottom: 4px;
@@ -148,13 +139,38 @@ h2 {
     padding: 4px 8px;
     color: $BBlack;
     border-radius: 4px;
+    border: 2px solid #e0e0e0;
+    transition: border-color 0.3s;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: $Accent40;
+      }
+    }
   }
 
   textarea {
     padding: 4px 8px;
     border-radius: 4px;
+    border: 2px solid #e0e0e0;
     resize: none;
     color: $BBlack;
+    transition: border-color 0.3s;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: $Accent40;
+      }
+    }
+  }
+
+  &--error {
+    input[type="text"],
+    textarea {
+      border-color: $HelpingRed100;
+
+      &::placeholder {
+        color: $HelpingRed100;
+      }
+    }
   }
 }
 

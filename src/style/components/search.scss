@@ -15,6 +15,12 @@
     font-size: 16px;
     color: $BBlack;
     transition: border-color 0.3s;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        border-color: $Accent40;
+      }
+    }
   }
 
   &__clear {

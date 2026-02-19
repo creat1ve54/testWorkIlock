@@ -7,6 +7,17 @@
   padding: 6px;
   box-shadow: var(--shadow-item);
   border-radius: 10px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  &--complited {
+    opacity: 0.4;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 
   &__btns {
     display: flex;
@@ -47,24 +58,58 @@
     height: 30px;
 
     svg {
-        flex: 0 0 auto;
+      flex: 0 0 auto;
     }
 
     &--complited {
       svg {
         stroke: var(--stroke);
+        transition: stroke 0.3s ease-in-out;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          svg {
+            stroke: var(--stroke-hover);
+          }
+        }
       }
     }
 
     &--delete {
       svg {
         fill: var(--fill);
+        transition: fill 0.3s ease-in-out;
+
+        use {
+          transition: fill 0.3s ease-in-out;
+        }
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          svg {
+            fill: var(--fill-hover);
+            use {
+              color: var(--fill-hover);
+            }
+          }
+        }
       }
     }
 
     &--edit {
       svg {
         fill: var(--fill);
+        transition: fill 0.3s ease-in-out;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          svg {
+            fill: var(--fill-hover);
+          }
+        }
       }
     }
   }

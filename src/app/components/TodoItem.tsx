@@ -28,7 +28,7 @@ const TodoItem = ({ todo }: { todo: ITodo }) => {
     e.preventDefault();
     dispatch(deleteTodoThunk(todo.id));
   };
-  
+
   const onEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     open();
@@ -36,7 +36,12 @@ const TodoItem = ({ todo }: { todo: ITodo }) => {
 
   return (
     <>
-      <Link className="todo" to={`/todo/${todo.id}`}>
+      <Link
+        className={`todo ${
+          todo.status === "Выполнено" ? "todo--complited" : ""
+        }`}
+        to={`/todo/${todo.id}`}
+      >
         <div className="todo__up">
           <h3 className="todo__title">{todo.title}</h3>
           <p className="todo__description">
@@ -83,7 +88,12 @@ const TodoItem = ({ todo }: { todo: ITodo }) => {
         </div>
       </Link>
 
-      <Modal isOpen={isOpen} onClose={close} title="Создание задачи" className="modal-todo-form">
+      <Modal
+        isOpen={isOpen}
+        onClose={close}
+        title="Создание задачи"
+        className="modal-todo-form"
+      >
         <TodoForm onClose={close} todo={todo} isEdit={true} />
       </Modal>
     </>
