@@ -8,8 +8,10 @@ export const instance = axios.create({
 
 export const todosAPI = {
   getTodos() {
-    // return instance.get("/todos?_page=1&_per_page=5");
     return instance.get("/todos");
+  },
+  getSearchTodos(q: string) {
+    return instance.get(`/todos?title:gte=${q}`);
   },
 }
 
@@ -27,3 +29,9 @@ export const todoAPI = {
     return instance.delete(`/todos/${id}`);
   },
 };
+
+export const usersAPI = {
+  getUsers() {
+    return instance.get("/users");
+  },
+}

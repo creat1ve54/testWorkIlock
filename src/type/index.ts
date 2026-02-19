@@ -10,5 +10,20 @@ export interface ITodoModal {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
+  className?: string;
   children: React.ReactNode;
+}
+
+export interface IUser {
+  id: string;
+  name: string;
+  role: string;
+  bio: string;
+}
+
+export interface ISvg {
+  name: string;
+  color?: string;
+  width?: number;
+  height?: number;
 }

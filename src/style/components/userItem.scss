@@ -1,0 +1,13 @@
+.user-item {
+    &__title {
+        margin-bottom: 12px;
+    }
+
+    &__bio {
+        margin-bottom: 8px;
+    }
+
+    &__role {
+        font-style: italic;
+    }
+}

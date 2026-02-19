@@ -57,6 +57,7 @@ const TodoItem = ({ todo }: { todo: ITodo }) => {
             <button
               className="todo__btn todo__btn--complited"
               onClick={(e) => onChangeStatus(e)}
+              aria-label="Изменить статус"
             >
               {todo.status === "Выполнено" ? (
                 <Svg name="pending" width={14} height={14} />
@@ -67,12 +68,14 @@ const TodoItem = ({ todo }: { todo: ITodo }) => {
             <button
               className="todo__btn todo__btn--edit"
               onClick={(e) => onEdit(e)}
+              aria-label="Изменить задачу"
             >
               <Svg name="edit" width={20} height={20} />
             </button>
             <button
               className="todo__btn todo__btn--delete"
               onClick={(e) => onDelete(e)}
+              aria-label="Удалить задачу"
             >
               <Svg name="delete" width={20} height={20} />
             </button>
@@ -80,7 +83,7 @@ const TodoItem = ({ todo }: { todo: ITodo }) => {
         </div>
       </Link>
 
-      <Modal isOpen={isOpen} onClose={close} title="Создание задачи">
+      <Modal isOpen={isOpen} onClose={close} title="Создание задачи" className="modal-todo-form">
         <TodoForm onClose={close} todo={todo} isEdit={true} />
       </Modal>
     </>

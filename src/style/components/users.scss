@@ -1,0 +1,11 @@
+.users {
+    padding: 20px;
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}

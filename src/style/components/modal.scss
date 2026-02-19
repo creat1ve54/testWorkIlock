@@ -22,9 +22,11 @@
     height: 100%;
     top: 50%;
     left: 50%;
+    height: auto;
+    width: auto;
     transform: translate(-50%, -50%);
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 100dvh;
+    max-height: 500dvh;
     overflow: auto;
     background-color: var(--bg-modal);
     border-radius: 12px;

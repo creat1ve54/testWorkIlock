@@ -3,9 +3,13 @@ import { todoAPI, todosAPI } from "../../api/axios";
 import { ITodo } from "../../type";
 import { deleteTodoThunk, putTodoThunk } from "../todo/todoSlice";
 
-//THUNK
-export const todosThunk = createAsyncThunk("post/getTodosThunk", async () => {
+export const todosThunk = createAsyncThunk("todos/getTodosThunk", async () => {
   const todosData = (await todosAPI.getTodos()).data;
+  return todosData;
+});
+
+export const getSearchTodos = createAsyncThunk("todos/getSearchTodos", async (q: string) => {
+  const todosData = (await todosAPI.getSearchTodos(q)).data;
   return todosData;
 });
 
@@ -45,7 +49,19 @@ export const todosSlice = createSlice({
       state.isLoading = false;
       state.error = "";
       state.todos = action.payload;
-      // state.todos = action.payload.data;
+    });
+
+    builder.addCase(getSearchTodos.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getSearchTodos.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(getSearchTodos.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.error = "";
+      state.todos = action.payload;
     });
 
     builder.addCase(postTodoThunk.pending, (state, action) => {
@@ -85,6 +101,5 @@ export const todosSlice = createSlice({
   },
 });
 
-// export const {} = todosSlice.actions;
 
 export default todosSlice.reducer;

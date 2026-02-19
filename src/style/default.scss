@@ -117,9 +117,7 @@ h2 {
       }
     }
   }
-  
 }
-
 
 .field {
   position: relative;
@@ -129,7 +127,8 @@ h2 {
   padding-bottom: 20px;
 
   &--error {
-    input[type='text'], textarea {
+    input[type="text"],
+    textarea {
       border-color: $HelpingRed100;
 
       &::placeholder {
@@ -138,7 +137,6 @@ h2 {
     }
   }
 
-
   &__error {
     position: absolute;
     bottom: 4px;
@@ -146,7 +144,7 @@ h2 {
     color: $HelpingRed100;
   }
 
-  input[type='text'] {
+  input[type="text"] {
     padding: 4px 8px;
     color: $BBlack;
     border-radius: 4px;
@@ -157,5 +155,79 @@ h2 {
     border-radius: 4px;
     resize: none;
     color: $BBlack;
+  }
+}
+
+.modal-todo-form {
+  .modal__content {
+    max-width: 500px;
+    width: 100%;
+  }
+
+  @include mediumMobile {
+    .modal__content {
+      height: 100dvh;
+      max-width: none;
+      width: 100%;
+      border-radius: 0;
+    }
+
+    .modal__body {
+      display: flex;
+      flex-direction: column;
+      .todo-form {
+        height: 20px;
+        flex: 1 1 auto;
+        overflow: auto;
+        padding-bottom: 0;
+
+        &__btns {
+          position: sticky;
+          bottom: 0px;
+          padding: 10px 0px;
+          background-color: var(--bg-modal);
+        }
+      }
+    }
+  }
+}
+
+.modal-users {
+  .modal__content {
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .modal__body {
+    max-height: 500px;
+    min-height: 300px;
+    overflow: auto;
+  }
+
+  @include mediumMobile {
+    .modal__content {
+      height: 100dvh;
+      max-width: none;
+      width: 100%;
+      border-radius: 0;
+    }
+
+    .modal__body {
+      display: flex;
+      flex-direction: column;
+      max-height: initial;
+      .users {
+        height: 20px;
+        flex: 1 1 auto;
+        overflow: auto;
+
+        &__btns {
+          position: sticky;
+          bottom: 0px;
+          padding: 10px 0px;
+          background-color: var(--bg-modal);
+        }
+      }
+    }
   }
 }

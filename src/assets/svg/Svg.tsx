@@ -1,12 +1,6 @@
 import React from "react";
 import Icons from "./icons.svg";
-
-interface ISvg {
-  name: string;
-  color?: string;
-  width?: number;
-  height?: number;
-}
+import { ISvg } from "../../type";
 
 const Svg = ({ name, color, width, height }: ISvg) => {
   return (

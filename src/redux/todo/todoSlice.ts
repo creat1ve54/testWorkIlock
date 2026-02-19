@@ -84,6 +84,4 @@ export const todoSlice = createSlice({
   },
 });
 
-// export const {} = todoSlice.actions;
-
 export default todoSlice.reducer;

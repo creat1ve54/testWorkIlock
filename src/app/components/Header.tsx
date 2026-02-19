@@ -4,11 +4,30 @@ import { useModal } from "../../hooks/useModal";
 import Modal from "./Modal";
 import TodoForm from "./TodoForm";
 import { useNavigate } from "react-router-dom";
+import Users from "./Users";
 
 const Header = ({ isBack = false }: { isBack?: boolean }) => {
-  const { isOpen, open, close } = useModal();
+  const {
+    isOpen: isTodoModalOpen,
+    open: openTodoModal,
+    close: closeTodoModal,
+  } = useModal();
+
+  const {
+    isOpen: isUsersModalOpen,
+    open: openUsersModal,
+    close: closeUsersModal,
+  } = useModal();
   const [themeLigth, setThemeLigth] = useState(true);
   const navigation = useNavigate();
+
+  const onBack = () => {
+    navigation(-1);
+  };
+
+  const onChangeTheme = () => {
+    setThemeLigth((prev) => !prev);
+  };
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -23,21 +42,17 @@ const Header = ({ isBack = false }: { isBack?: boolean }) => {
     localStorage.setItem("theme", theme);
   }, [themeLigth]);
 
-  const onBack = () => {
-    navigation(-1);
-  };
-
-  const onChangeTheme = () => {
-    setThemeLigth((prev) => !prev);
-  };
-
   return (
     <header className="header">
       <div className="container">
         <div className="header__container">
           <div className="header__left">
             {isBack ? (
-              <button className="header__back" onClick={onBack}>
+              <button
+                className="header__back"
+                onClick={onBack}
+                aria-label="Назад"
+              >
                 <Svg name="arrow-left" width={20} height={20} />
                 <span>Назад</span>
               </button>
@@ -55,6 +70,7 @@ const Header = ({ isBack = false }: { isBack?: boolean }) => {
                 type="checkbox"
                 checked={themeLigth}
                 onChange={onChangeTheme}
+                aria-label="Переключатель темы"
               />
               {themeLigth ? (
                 <Svg name="moon" width={20} height={20} />
@@ -62,17 +78,38 @@ const Header = ({ isBack = false }: { isBack?: boolean }) => {
                 <Svg name="sun" width={20} height={20} />
               )}
             </label>
-            <button onClick={open} className="header__add">
+            <button
+              onClick={openTodoModal}
+              className="header__add"
+              aria-label="Добавить задачу"
+            >
               <Svg name="task-add" width={20} height={20} />
               <span>Добавить задачу</span>
             </button>
+            <Modal
+              isOpen={isTodoModalOpen}
+              onClose={closeTodoModal}
+              title="Добавить задачу"
+              className="modal-todo-form"
+            >
+              <TodoForm onClose={closeTodoModal} />
+            </Modal>
 
-            <button onClick={open} className="header__user">
+            <button
+              onClick={openUsersModal}
+              className="header__user"
+              aria-label="Список пользователей"
+            >
               <Svg name="user" width={20} height={20} />
             </button>
 
-            <Modal isOpen={isOpen} onClose={close} title="Добавить задачу">
-              <TodoForm onClose={close} />
+            <Modal
+              isOpen={isUsersModalOpen}
+              onClose={closeUsersModal}
+              title="Список пользователь"
+              className="modal-users"
+            >
+              <Users onClose={closeUsersModal} />
             </Modal>
           </div>
         </div>

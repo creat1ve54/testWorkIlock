@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import {
-  deleteTodoThunk,
-  getTodoThunk,
-} from "../../redux/todo/todoSlice";
+import { deleteTodoThunk, getTodoThunk } from "../../redux/todo/todoSlice";
 import Modal from "../components/Modal";
 import TodoForm from "../components/TodoForm";
 import { useModal } from "../../hooks/useModal";
@@ -17,7 +14,6 @@ const DetailTodo = () => {
   const { todo, isLoading, error } = useAppSelector((state) => state.todoSlice);
   const params = useParams();
   const navigate = useNavigate();
-
 
   const onDelete = () => {
     if (todo) {
@@ -60,14 +56,27 @@ const DetailTodo = () => {
               </div>
 
               <div className="todo-detail__btns">
-                <button onClick={open} className="todo-detail__btn todo-detail__btn--edit">
+                <button
+                  onClick={open}
+                  className="todo-detail__btn todo-detail__btn--edit"
+                  aria-label="Изменить задачу"
+                >
                   <Svg name="edit" width={20} height={20} />
                 </button>
-                <button onClick={onDelete} className="todo-detail__btn todo-detail__btn--delete">
+                <button
+                  onClick={onDelete}
+                  className="todo-detail__btn todo-detail__btn--delete"
+                  aria-label="Удалить задачу"
+                >
                   <Svg name="delete" width={20} height={20} />
                 </button>
               </div>
-              <Modal isOpen={isOpen} onClose={close} title="Создание задачи">
+              <Modal
+                isOpen={isOpen}
+                onClose={close}
+                title="Создание задачи"
+                className="modal-todo-form"
+              >
                 <TodoForm onClose={close} todo={todo} isEdit={true} />
               </Modal>
             </div>
