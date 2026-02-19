@@ -20,18 +20,6 @@ const DetailTodo = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const onChangeStatus = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (todo) {
-      let status = todo.status === "Выполнено" ? "В работе" : "Выполнено";
-
-      const newTodo: Partial<ITodo> = {
-        ...todo,
-        status: status,
-      };
-
-      dispatch(putTodoThunk({ id: todo.id, updateTodo: newTodo }));
-    }
-  };
 
   const onDelete = () => {
     if (todo) {

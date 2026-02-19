@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { todoAPI, todosAPI } from "../../api/axios";
 import { ITodo } from "../../type";
 import { deleteTodoThunk, putTodoThunk } from "../todo/todoSlice";
