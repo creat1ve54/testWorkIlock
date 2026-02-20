@@ -6,6 +6,13 @@ export interface ITodo {
   createdAt: string;
 }
 
+export interface IPagination {
+  totalCount: number;
+  currentPage: number;
+  totalPages: number;
+  limit: number;
+}
+
 export interface ITodoModal {
   isOpen: boolean;
   onClose: () => void;

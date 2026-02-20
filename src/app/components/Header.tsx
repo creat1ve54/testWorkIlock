@@ -26,7 +26,13 @@ const Header = ({ isBack = false }: { isBack?: boolean }) => {
   };
 
   const onChangeTheme = () => {
-    setThemeLigth((prev) => !prev);
+    setThemeLigth((prev) => {
+      const theme = !prev ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+
+      return !prev;
+    });
   };
 
   useEffect(() => {
@@ -35,12 +41,6 @@ const Header = ({ isBack = false }: { isBack?: boolean }) => {
       setThemeLigth(savedTheme === "light");
     }
   }, []);
-
-  useEffect(() => {
-    const theme = themeLigth ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [themeLigth]);
 
   return (
     <header className="header">

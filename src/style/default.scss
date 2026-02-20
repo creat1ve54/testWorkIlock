@@ -9,6 +9,7 @@
   --border: #{$BReserve};
   --fill-hover: #{$Accent40};
   --stroke-hover: #{$Accent40};
+  --bg-pagination: #{$Accent80};
 }
 
 // Класс или атрибут для темной темы
@@ -21,6 +22,7 @@
   --fill: #{$WWhite};
   --stroke: #{$WWhite};
   --bg-modal: #{$BReserve};
+  --bg-pagination: #{$Accent60};
 }
 
 * {
@@ -30,6 +32,7 @@
   color: var(--text-color);
 }
 
+html,
 body {
   background-color: var(--bg-color);
 }

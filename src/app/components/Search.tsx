@@ -1,8 +1,14 @@
 import React, { ChangeEvent, useState } from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 
-const Search = ({ onSearch }: { onSearch: (query: string) => void }) => {
-  const [query, setQuery] = useState("");
+const Search = ({
+  onSearch,
+  value="",
+}: {
+  onSearch: (query: string) => void;
+  value?: string;
+}) => {
+  const [query, setQuery] = useState(value);
 
   const debouncedSearch = useDebounce((value: string) => {
     onSearch(value.trim());

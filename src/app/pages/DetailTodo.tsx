@@ -30,60 +30,62 @@ const DetailTodo = () => {
   }, [dispatch, params.id]);
 
   return (
-    <div className="todo-detail">
+    <>
       <Header isBack={true} />
-      <div className="container">
-        <div className="todo-detail__container">
-          {isLoading ? (
-            <div>...Загрузка</div>
-          ) : error ? (
-            <div>{error}</div>
-          ) : !todo ? (
-            <div>Нет такой задачи</div>
-          ) : (
-            <div className="todo-detail__info">
-              <div className="todo-detail__id">#{todo.id}</div>
-              <h2 className="todo-detail__title">{todo.title}</h2>
-              <p className="todo-detail__description">{todo.description}</p>
-              <div
-                className={`todo-detail__status ${
-                  todo.status === "Выполнено"
-                    ? "todo-detail__status--complited"
-                    : "todo-detail__status--pending"
-                }`}
-              >
-                Статус: <span>{todo.status}</span>
-              </div>
+      <div className="todo-detail">
+        <div className="container">
+          <div className="todo-detail__container">
+            {isLoading ? (
+              <div>...Загрузка</div>
+            ) : error ? (
+              <div>{error}</div>
+            ) : !todo ? (
+              <div>Нет такой задачи</div>
+            ) : (
+              <div className="todo-detail__info">
+                <div className="todo-detail__id">#{todo.id}</div>
+                <h2 className="todo-detail__title">{todo.title}</h2>
+                <p className="todo-detail__description">{todo.description}</p>
+                <div
+                  className={`todo-detail__status ${
+                    todo.status === "Выполнено"
+                      ? "todo-detail__status--complited"
+                      : "todo-detail__status--pending"
+                  }`}
+                >
+                  Статус: <span>{todo.status}</span>
+                </div>
 
-              <div className="todo-detail__btns">
-                <button
-                  onClick={open}
-                  className="todo-detail__btn todo-detail__btn--edit"
-                  aria-label="Изменить задачу"
+                <div className="todo-detail__btns">
+                  <button
+                    onClick={open}
+                    className="todo-detail__btn todo-detail__btn--edit"
+                    aria-label="Изменить задачу"
+                  >
+                    <Svg name="edit" width={20} height={20} />
+                  </button>
+                  <button
+                    onClick={onDelete}
+                    className="todo-detail__btn todo-detail__btn--delete"
+                    aria-label="Удалить задачу"
+                  >
+                    <Svg name="delete" width={20} height={20} />
+                  </button>
+                </div>
+                <Modal
+                  isOpen={isOpen}
+                  onClose={close}
+                  title="Создание задачи"
+                  className="modal-todo-form"
                 >
-                  <Svg name="edit" width={20} height={20} />
-                </button>
-                <button
-                  onClick={onDelete}
-                  className="todo-detail__btn todo-detail__btn--delete"
-                  aria-label="Удалить задачу"
-                >
-                  <Svg name="delete" width={20} height={20} />
-                </button>
+                  <TodoForm onClose={close} todo={todo} isEdit={true} />
+                </Modal>
               </div>
-              <Modal
-                isOpen={isOpen}
-                onClose={close}
-                title="Создание задачи"
-                className="modal-todo-form"
-              >
-                <TodoForm onClose={close} todo={todo} isEdit={true} />
-              </Modal>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

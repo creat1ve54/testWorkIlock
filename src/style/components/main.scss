@@ -1,10 +1,19 @@
 .main {
+  height: 100%;
   .icon-task {
     stroke: var(--stroke);
   }
 
   &__container {
+    display: flex;
+    flex-direction: column;
     padding-block: 20px;
+    flex: 1 1 auto;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
   }
 
   &__list {
@@ -14,9 +23,14 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-bottom: 20px;
   }
 
   &__item {
     display: flex;
+  }
+
+  .pagination {
+    margin-top: auto;
   }
 }

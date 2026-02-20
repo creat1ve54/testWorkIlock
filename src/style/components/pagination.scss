@@ -1,0 +1,115 @@
+.pagination {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 16px;
+  background: var(--bg-color-header);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  &__info {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--bg-pagination);
+    color: $WWhite;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: var(--bg-pagination);
+      transform: translateY(-1px);
+    }
+
+    &:disabled,
+    &--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    &--prev {
+      padding-left: 12px;
+    }
+
+    &--next {
+      padding-right: 12px;
+    }
+
+    &-text {
+      display: inline;
+      color: $WWhite;
+    }
+  }
+
+  &__pages {
+    display: flex;
+    gap: 6px;
+  }
+
+  &__page {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f7fa;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: $BBlack;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(.pagination__page--active) {
+      background: #e9ebf0;
+      transform: scale(1.05);
+    }
+
+    &--active {
+      background: $Accent80;
+      color: $WWhite;
+      border-color: $Accent80;
+      transform: scale(1.1);
+      box-shadow: 0 2px 6px rgba(74, 108, 247, 0.3);
+    }
+  }
+
+  &__dots {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $BSupport;
+    font-size: 16px;
+  }
+
+  @include mobile {
+    &__btn {
+      &-text {
+        display: none;
+      }
+    }
+  }
+}

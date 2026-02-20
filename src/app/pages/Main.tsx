@@ -1,63 +1,102 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { todosThunk } from "../../redux/todos/todosSlice";
+import { getSearchTodos, todosThunk } from "../../redux/todos/todosSlice";
 import Header from "../components/Header";
 import TodoItem from "../components/TodoItem";
 import Search from "../components/Search";
+import Pagination from "../components/Pagination";
+import { useSearchParams } from "react-router-dom";
 
 const Main = () => {
   const dispatch = useAppDispatch();
-  const { todos, isLoading, error } = useAppSelector(
+  const { todos, paginations, isLoading, error } = useAppSelector(
     (state) => state.todosSlice,
   );
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredTodos = useMemo(() => {
-    if (!searchQuery.trim()) return todos;
+  const [searchParams, setSearchParams] = useSearchParams();
 
-    const query = searchQuery.toLowerCase().trim();
+  const currentPageFromUrl = parseInt(searchParams.get("page") || "1", 10);
+  const searchQueryFromUrl = searchParams.get("q") || "";
 
-    return todos.filter(
-      (todo) =>
-        (todo.title && todo.title.toLowerCase().includes(query)) ||
-        (todo.description && todo.description.toLowerCase().includes(query)) ||
-        (todo.status && todo.status.toLowerCase().includes(query)),
-    );
-  }, [todos, searchQuery]);
+  const handlePageChange = (page: number) => {
+    setSearchParams((prev) => {
+      prev.set("page", page.toString());
+
+      if (searchQuery.trim()) {
+        prev.set("q", searchQuery.trim());
+      } else {
+        prev.delete("q");
+      }
+
+      return prev;
+    });
+  };
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
+
+    setSearchParams((prev) => {
+      if (query.trim()) {
+        prev.set("q", query.trim());
+        prev.set("page", "1");
+      } else {
+        prev.delete("q");
+        prev.delete("page");
+      }
+      return prev;
+    });
   };
 
   useEffect(() => {
-    dispatch(todosThunk());
-  }, [dispatch]);
+    if (searchQueryFromUrl) {
+      dispatch(
+        getSearchTodos({ q: searchQueryFromUrl, page: currentPageFromUrl }),
+      );
+    } else {
+      dispatch(todosThunk({ page: currentPageFromUrl }));
+    }
+  }, [dispatch, currentPageFromUrl, searchQueryFromUrl]);
 
   return (
-    <div className="main">
+    <>
       <Header />
-      <div className="container">
-        <div className="main__container">
-          {isLoading ? (
-            <div>Загрузка...</div>
-          ) : error ? (
-            <div>{error}</div>
-          ) : (
-            <div>
-              <Search onSearch={handleSearch} />
-              <ul className="main__list">
-                {filteredTodos.map((todo) => (
-                  <li key={todo.id} className="main__item">
-                    <TodoItem todo={todo} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+      <div className="main">
+        <div className="container">
+          <div className="main__container">
+            <Search onSearch={handleSearch} value={searchQueryFromUrl} />
+            {isLoading ? (
+              <div>Загрузка...</div>
+            ) : error ? (
+              <div>{error}</div>
+            ) : (
+              <>
+                <div>
+                  {todos.length > 0 ? (
+                    <ul className="main__list">
+                      {todos.map((todo) => (
+                        <li key={todo.id} className="main__item">
+                          <TodoItem todo={todo} />
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div>Такой задачи нет</div>
+                  )}
+                </div>
+                {paginations.totalPages > 1 && (
+                  <Pagination
+                    paginations={paginations}
+                    onPageChange={handlePageChange}
+                  />
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

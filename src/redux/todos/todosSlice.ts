@@ -1,17 +1,56 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { todoAPI, todosAPI } from "../../api/axios";
-import { ITodo } from "../../type";
+import { IPagination, ITodo } from "../../type";
 import { deleteTodoThunk, putTodoThunk } from "../todo/todoSlice";
 
-export const todosThunk = createAsyncThunk("todos/getTodosThunk", async () => {
-  const todosData = (await todosAPI.getTodos()).data;
-  return todosData;
-});
+export const todosThunk = createAsyncThunk(
+  "todos/getTodosThunk",
+  async ({ page = 1, limit = 5 }: { page?: number; limit?: number }) => {
+    const todosData = (await todosAPI.getTodos(page, limit));    
 
-export const getSearchTodos = createAsyncThunk("todos/getSearchTodos", async (q: string) => {
-  const todosData = (await todosAPI.getSearchTodos(q)).data;
-  return todosData;
-});
+    const totalCount = parseInt(todosData.headers["x-total-count"] || "0", 10);
+    const totalPages = Math.ceil(totalCount / limit);
+
+    return {
+      data: todosData.data,
+      paginations: {
+        totalCount,
+        currentPage: page,
+        totalPages,
+        limit,
+      },
+    };
+  },
+);
+
+export const getSearchTodos = createAsyncThunk(
+  "todos/getSearchTodos",
+  async ({
+    q,
+    page = 1,
+    limit = 5,
+  }: {
+    q: string;
+    page?: number;
+    limit?: number;
+  }) => {
+    const todosData = (await todosAPI.getSearchTodos(q, page, limit));
+
+    const totalCount = parseInt(todosData.headers["x-total-count"] || "0", 10);
+    const totalPages = Math.ceil(totalCount / limit);
+
+    // return todosData;
+    return {
+      data: todosData.data,
+      paginations: {
+        totalCount,
+        currentPage: page,
+        totalPages,
+        limit,
+      },
+    };
+  },
+);
 
 export const postTodoThunk = createAsyncThunk(
   "todos/postTodoThunk",
@@ -23,12 +62,19 @@ export const postTodoThunk = createAsyncThunk(
 
 interface ITodosInitial {
   todos: ITodo[];
+  paginations: IPagination;
   isLoading: boolean;
   error: string | undefined;
 }
 
 const initialState: ITodosInitial = {
   todos: [],
+  paginations: {
+    currentPage: 1,
+    limit: 5,
+    totalCount: 0,
+    totalPages: 0,
+  },
   isLoading: false,
   error: "",
 };
@@ -48,7 +94,9 @@ export const todosSlice = createSlice({
     builder.addCase(todosThunk.fulfilled, (state, action) => {
       state.isLoading = false;
       state.error = "";
-      state.todos = action.payload;
+      // state.todos = action.payload;
+      state.todos = action.payload.data;
+      state.paginations = action.payload.paginations;
     });
 
     builder.addCase(getSearchTodos.pending, (state, action) => {
@@ -61,7 +109,9 @@ export const todosSlice = createSlice({
     builder.addCase(getSearchTodos.fulfilled, (state, action) => {
       state.isLoading = false;
       state.error = "";
-      state.todos = action.payload;
+      // state.todos = action.payload;
+      state.todos = action.payload.data;
+      state.paginations = action.payload.paginations;
     });
 
     builder.addCase(postTodoThunk.pending, (state, action) => {
@@ -100,6 +150,5 @@ export const todosSlice = createSlice({
     });
   },
 });
-
 
 export default todosSlice.reducer;
