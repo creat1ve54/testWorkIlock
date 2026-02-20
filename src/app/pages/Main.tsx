@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getSearchTodos, todosThunk } from "../../redux/todos/todosSlice";
 import Header from "../components/Header";
