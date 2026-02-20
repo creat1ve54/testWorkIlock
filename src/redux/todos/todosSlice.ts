@@ -5,7 +5,7 @@ import { deleteTodoThunk, putTodoThunk } from "../todo/todoSlice";
 
 export const todosThunk = createAsyncThunk(
   "todos/getTodosThunk",
-  async ({ page = 1, limit = 5 }: { page?: number; limit?: number }) => {
+  async ({ page = 1, limit = 15 }: { page?: number; limit?: number }) => {
     const todosData = (await todosAPI.getTodos(page, limit));    
 
     const totalCount = parseInt(todosData.headers["x-total-count"] || "0", 10);
@@ -28,7 +28,7 @@ export const getSearchTodos = createAsyncThunk(
   async ({
     q,
     page = 1,
-    limit = 5,
+    limit = 15,
   }: {
     q: string;
     page?: number;
