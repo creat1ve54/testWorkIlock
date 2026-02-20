@@ -14,10 +14,12 @@ const TodoForm = ({
   todo,
   isEdit = false,
   onClose,
+  onUpdateList,
 }: {
   todo?: ITodo;
   isEdit?: boolean;
   onClose: () => void;
+  onUpdateList?: () => void;
 }) => {
   const dispatch = useAppDispatch();
 
@@ -33,17 +35,19 @@ const TodoForm = ({
     },
   });
 
-  const onSubmit: SubmitHandler<TodoFormInputs> = (data) => {
+  const onSubmit: SubmitHandler<TodoFormInputs> = async (data) => {
     const formData: Partial<ITodo> = {
       ...data,
       ...(isEdit && todo?.id ? { id: todo.id } : {}),
     };
 
     if (isEdit && todo) {
-      dispatch(putTodoThunk({ id: todo.id, updateTodo: formData }));
+      await dispatch(putTodoThunk({ id: todo.id, updateTodo: formData }));
     } else {
-      dispatch(postTodoThunk(formData));
+      await dispatch(postTodoThunk(formData));
     }
+
+    onUpdateList?.();
 
     onClose();
   };
@@ -51,7 +55,7 @@ const TodoForm = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="todo-form">
       <div>
-        <label className={`field ${errors.title ? 'field--error' : ''}`}>
+        <label className={`field ${errors.title ? "field--error" : ""}`}>
           <div className="field__title">Название</div>
           <input
             type="text"
@@ -64,7 +68,7 @@ const TodoForm = ({
           )}
         </label>
 
-        <div className={`field ${errors.status ? 'field--error' : ''}`}>
+        <div className={`field ${errors.status ? "field--error" : ""}`}>
           <div className="field__title">Статус</div>
           <div className="custom-switch">
             <label className="custom-switch__item">
@@ -74,7 +78,7 @@ const TodoForm = ({
                 value="В работе"
                 aria-label="Стутус"
               />
-              <span>В работе</span> 
+              <span>В работе</span>
             </label>
             <label className="custom-switch__item">
               <input
@@ -91,7 +95,7 @@ const TodoForm = ({
           )}
         </div>
 
-        <label className={`field ${errors.description ? 'field--error' : ''}`}>
+        <label className={`field ${errors.description ? "field--error" : ""}`}>
           <div className="field__title">Описание</div>
           <textarea
             rows={5}
@@ -108,7 +112,11 @@ const TodoForm = ({
       </div>
 
       <div className="todo-form__btns">
-        <button className="todo-form__btn todo-form__btn--submit" type="submit" aria-label="Отправить форму">
+        <button
+          className="todo-form__btn todo-form__btn--submit"
+          type="submit"
+          aria-label="Отправить форму"
+        >
           {isEdit ? "Сохранить" : "Создать"}
         </button>
         <button

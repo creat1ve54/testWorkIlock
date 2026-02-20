@@ -2,13 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ITodo } from "../../type";
 import Svg from "../../assets/svg/Svg";
-import { deleteTodoThunk, putTodoThunk } from "../../redux/todo/todoSlice";
+import {  putTodoThunk } from "../../redux/todo/todoSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { useModal } from "../../hooks/useModal";
 import Modal from "./Modal";
 import TodoForm from "./TodoForm";
 
-const TodoItem = ({ todo }: { todo: ITodo }) => {
+
+interface TodoItemProps {
+  todo: ITodo;
+  onDeleteTodo?: () => void;
+  onUpdateTodo?: () => void;
+}
+
+const TodoItem = ({ todo, onDeleteTodo, onUpdateTodo }: TodoItemProps) => {
   const { isOpen, open, close } = useModal();
   const dispatch = useAppDispatch();
 
@@ -26,13 +33,14 @@ const TodoItem = ({ todo }: { todo: ITodo }) => {
 
   const onDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(deleteTodoThunk(todo.id));
+    onDeleteTodo?.()
   };
 
   const onEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     open();
   };
+
 
   return (
     <>
@@ -94,7 +102,7 @@ const TodoItem = ({ todo }: { todo: ITodo }) => {
         title="Создание задачи"
         className="modal-todo-form"
       >
-        <TodoForm onClose={close} todo={todo} isEdit={true} />
+        <TodoForm onClose={close} todo={todo} isEdit={true} onUpdateList={onUpdateTodo}/>
       </Modal>
     </>
   );

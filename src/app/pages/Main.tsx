@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getSearchTodos, todosThunk } from "../../redux/todos/todosSlice";
 import Header from "../components/Header";
@@ -6,6 +6,7 @@ import TodoItem from "../components/TodoItem";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
 import { useSearchParams } from "react-router-dom";
+import { deleteTodoThunk } from "../../redux/todo/todoSlice";
 
 const Main = () => {
   const dispatch = useAppDispatch();
@@ -32,8 +33,23 @@ const Main = () => {
 
       return prev;
     });
+  };
 
-    
+  const handleDeleteTodo = async (id: string) => {
+    await dispatch(deleteTodoThunk(id));
+
+    if (todos.length === 1) {
+      setSearchParams((prev) => {
+        prev.set("page", "1");
+        return prev;
+      });
+    } else {
+      loadTodos(currentPageFromUrl, searchQueryFromUrl);
+    }
+  };
+
+  const handleUpdateTodo = () => {
+    loadTodos(currentPageFromUrl, searchQueryFromUrl);
   };
 
   const handleSearch = (query: string) => {
@@ -51,19 +67,24 @@ const Main = () => {
     });
   };
 
+  const loadTodos = useCallback(
+    (page: number, query: string = "") => {
+      if (query.trim()) {
+        dispatch(getSearchTodos({ q: query, page }));
+      } else {
+        dispatch(todosThunk({ page }));
+      }
+    },
+    [dispatch],
+  );
+
   useEffect(() => {
-    if (searchQueryFromUrl) {
-      dispatch(
-        getSearchTodos({ q: searchQueryFromUrl, page: currentPageFromUrl }),
-      );
-    } else {
-      dispatch(todosThunk({ page: currentPageFromUrl }));
-    }
-  }, [dispatch, currentPageFromUrl, searchQueryFromUrl]);
+    loadTodos(currentPageFromUrl, searchQueryFromUrl);
+  }, [currentPageFromUrl, searchQueryFromUrl, loadTodos]);
 
   return (
     <>
-      <Header />
+      <Header onUpdateTodo={handleUpdateTodo} />
       <div className="main">
         <div className="container">
           <div className="main__container">
@@ -79,7 +100,11 @@ const Main = () => {
                     <ul className="main__list">
                       {todos.map((todo) => (
                         <li key={todo.id} className="main__item">
-                          <TodoItem todo={todo} />
+                          <TodoItem
+                            todo={todo}
+                            onDeleteTodo={() => handleDeleteTodo(todo.id)}
+                            onUpdateTodo={handleUpdateTodo}
+                          />
                         </li>
                       ))}
                     </ul>

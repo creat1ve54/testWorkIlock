@@ -6,7 +6,7 @@ import TodoForm from "./TodoForm";
 import { useNavigate } from "react-router-dom";
 import Users from "./Users";
 
-const Header = ({ isBack = false }: { isBack?: boolean }) => {
+const Header = ({ isBack = false, onUpdateTodo }: { isBack?: boolean, onUpdateTodo?: () => void; }) => {
   const {
     isOpen: isTodoModalOpen,
     open: openTodoModal,
@@ -92,7 +92,7 @@ const Header = ({ isBack = false }: { isBack?: boolean }) => {
               title="Добавить задачу"
               className="modal-todo-form"
             >
-              <TodoForm onClose={closeTodoModal} />
+              <TodoForm onClose={closeTodoModal} onUpdateList={onUpdateTodo}/>
             </Modal>
 
             <button
