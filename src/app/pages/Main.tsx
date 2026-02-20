@@ -78,6 +78,37 @@ const Main = () => {
     [dispatch],
   );
 
+   useEffect(() => {
+    if (!isLoading && paginations.totalPages > 0) {
+      const totalPages = paginations.totalPages;
+      const currentPage = currentPageFromUrl;
+
+      if (currentPage > totalPages) {
+        setSearchParams(prev => {
+          prev.set("page", totalPages.toString());
+          if (searchQueryFromUrl.trim()) {
+            prev.set("q", searchQueryFromUrl.trim());
+          } else {
+            prev.delete("q");
+          }
+          return prev;
+        });
+      }
+      
+      if (totalPages === 0 && currentPage > 1) {
+        setSearchParams(prev => {
+          prev.set("page", "1");
+          if (searchQueryFromUrl.trim()) {
+            prev.set("q", searchQueryFromUrl.trim());
+          } else {
+            prev.delete("q");
+          }
+          return prev;
+        });
+      }
+    }
+  }, [isLoading, paginations.totalPages, currentPageFromUrl, searchQueryFromUrl, setSearchParams]);
+
   useEffect(() => {
     loadTodos(currentPageFromUrl, searchQueryFromUrl);
   }, [currentPageFromUrl, searchQueryFromUrl, loadTodos]);
@@ -109,7 +140,7 @@ const Main = () => {
                       ))}
                     </ul>
                   ) : (
-                    <div>Такой задачи нет</div>
+                    <div>Таких задач нет</div>
                   )}
                 </div>
                 {paginations.totalPages > 1 && (
