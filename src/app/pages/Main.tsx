@@ -32,6 +32,8 @@ const Main = () => {
 
       return prev;
     });
+
+    
   };
 
   const handleSearch = (query: string) => {
